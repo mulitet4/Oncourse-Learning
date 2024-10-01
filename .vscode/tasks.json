@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Open Workspace",
+      "type": "shell",
+      "command": "code",
+      "args": ["${workspaceFolder}/${workspaceFolderBasename}.code-workspace"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+      "runOptions": {"runOn": "folderOpen"}
+    }
+  ]
+}

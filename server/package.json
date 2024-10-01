@@ -1,0 +1,25 @@
+{
+  "name": "oncourse-learning-api",
+  "version": "0.0.1",
+  "description": "Socket connection enabled AI Chat App",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mulitet4/Oncourse-Learning-API.git"
+  },
+  "author": "Aaryan-Dongre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mulitet4/Oncourse-Learning-API/issues"
+  },
+  "homepage": "https://github.com/mulitet4/Oncourse-Learning-API#readme"
+}
