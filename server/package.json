@@ -1,13 +1,9 @@
 {
   "name": "oncourse-learning-api",
-  "version": "0.0.1",
-  "description": "Socket connection enabled AI Chat App",
-  "type": "module",
-  "dependencies": {
-    "express": "^4.21.0"
-  },
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "devDependencies": {},
+  "type": "module",
   "scripts": {
     "start": "node main.js",
     "dev": "nodemon main.js"
@@ -18,8 +14,20 @@
   },
   "author": "Aaryan-Dongre",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mulitet4/Oncourse-Learning-API/issues"
+  "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.7",
+    "socket.io": "^4.8.0",
+    "sqlite3": "^5.1.7"
   },
-  "homepage": "https://github.com/mulitet4/Oncourse-Learning-API#readme"
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "prisma": "^5.15.0"
+  }
 }

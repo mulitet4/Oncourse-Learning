@@ -1,14 +1,17 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "client"
-		},
-		{
-			"path": "server"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "client"
+    },
+    {
+      "path": "server"
+    },
+    {
+      "path": "test"
+    }
+  ],
+  "settings": {}
 }

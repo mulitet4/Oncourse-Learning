@@ -32,10 +32,12 @@ const CombinedDarkTheme = merge(DarkTheme, customDarkTheme);
 
 SplashScreen.preventAutoHideAsync();
 
-export default function () {
+import { Provider } from 'react-redux';
+import store from '../src/store/store';
+
+export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const paperTheme =
-    colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme;
+  const paperTheme = CombinedLightTheme;
 
   const [fontsLoaded] = useFonts({
     Archivo: require('../assets/fonts/Archivo.ttf'),
@@ -53,13 +55,12 @@ export default function () {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <Stack>
-        <Stack.Screen name='(auth)/login' options={{ headerShown: false }} />
-        <Stack.Screen
-          name='dashboard/index'
-          options={{ headerShown: true, title: 'Dashboard' }}
-        />
-      </Stack>
+      <Provider store={store}>
+        <Stack>
+          <Stack.Screen name='dashboard' options={{ headerShown: false }} />
+          <Stack.Screen name='patient' options={{ headerShown: false }} />
+        </Stack>
+      </Provider>
     </PaperProvider>
   );
 }

@@ -1,21 +1,16 @@
 import { View, useColorScheme } from 'react-native';
-import { Colors } from '../../../src/constants/Colors';
-import { useAppContext } from '../../../src/providers/authProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
-const PatientAdd = () => {
-  const colorScheme = useColorScheme();
-  const { isOffline, accessMode } = useAppContext();
+const PatientChat = () => {
+  const theme = useTheme();
 
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor:
-          colorScheme == 'dark'
-            ? Colors.dark.background
-            : Colors.light.background,
+        backgroundColor: theme.colors.primary,
       }}
     >
       <Text>Patient</Text>
@@ -23,4 +18,4 @@ const PatientAdd = () => {
   );
 };
 
-export default PatientAdd;
+export default PatientChat;

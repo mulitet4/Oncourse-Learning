@@ -1,0 +1,2 @@
+### Get Patients
+GET http://localhost:8000/api/patients
