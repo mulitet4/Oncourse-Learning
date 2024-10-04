@@ -89,6 +89,7 @@ const index = () => {
           {patients.patients.map((patient) => {
             return (
               <Card
+                key={patient.id}
                 onPress={() => {
                   router.push({
                     pathname: '/patient',

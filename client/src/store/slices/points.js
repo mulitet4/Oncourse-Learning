@@ -12,14 +12,20 @@ const pointsSlice = createSlice({
     incrementCurrentPoints: (state, data) => {
       state.currentPoints += data.payload;
     },
-    setCurrentTotalPoints: (state, data) => {
-      state.currentTotalPoints = data.payload;
+    incrementCurrentTotalPoints: (state, data) => {
+      state.currentTotalPoints += data.payload;
     },
     incrementGlobalPoints: (state, data) => {
       state.globalPoints += data.payload;
     },
     incrementGlobalTotalPoints: (state, data) => {
       state.globalTotalPoints += data.payload;
+    },
+    resetCurrentPoints: (state, data) => {
+      state.currentPoints = 0;
+    },
+    resetCurrentTotalPoints: (state, data) => {
+      state.currentTotalPoints = 0;
     },
   },
 });

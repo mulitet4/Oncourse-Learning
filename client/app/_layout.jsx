@@ -9,6 +9,7 @@ import {
   MD3LightTheme,
   PaperProvider,
   adaptNavigationTheme,
+  configureFonts,
 } from 'react-native-paper';
 import {
   DarkTheme as NavigationDarkTheme,
@@ -40,7 +41,7 @@ export default function RootLayout() {
   const paperTheme = CombinedLightTheme;
 
   const [fontsLoaded] = useFonts({
-    Archivo: require('../assets/fonts/Archivo.ttf'),
+    Rubik: require('../assets/fonts/Rubik.ttf'),
   });
 
   useEffect(() => {
@@ -53,8 +54,14 @@ export default function RootLayout() {
     return null;
   }
 
+  const fonts = configureFonts({
+    config: {
+      fontFamily: 'Rubik',
+    },
+  });
+
   return (
-    <PaperProvider theme={paperTheme}>
+    <PaperProvider theme={{ ...paperTheme, fonts }}>
       <Provider store={store}>
         <Stack>
           <Stack.Screen name='dashboard' options={{ headerShown: false }} />
