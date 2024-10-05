@@ -16,19 +16,13 @@ import { patientsActions } from '../../src/store/slices/patients';
 const index = () => {
   const router = useRouter();
   const theme = useTheme();
-  const globalPoints = useSelector((state) => state.points.globalPoints);
-  const globalTotalPoints = useSelector(
-    (state) => state.points.globalTotalPoints
-  );
   const patients = useSelector((state) => state.patients.patients);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   async function init() {
     // Using ngrok
-    const data = await fetch(
-      'https://c796-45-112-144-5.ngrok-free.app/api/patients'
-    );
+    const data = await fetch(process.env.EXPO_PUBLIC_API_URL + '/api/patients');
     dispatch(patientsActions.setPatients(await data.json()));
     setLoading(false);
   }
@@ -74,72 +68,69 @@ const index = () => {
             tw='font-bold'
             style={{ color: theme.colors.text }}
           >
-            Welcome
+            Choose your next case!
           </Text>
-          <View
-            style={{ backgroundColor: theme.colors.secondary }}
-            tw='flex flex-row rounded-full py-1 px-3'
-          >
-            <Text variant='titleMedium' style={{ color: theme.colors.text }}>
-              {globalPoints}/{globalTotalPoints} points
-            </Text>
-          </View>
         </View>
         <ScrollView tw='px-3 pb-3 space-y-2'>
           {patients.patients.map((patient) => {
             return (
-              <Card
+              <View
+                tw='pb-2 rounded-xl'
+                style={{ backgroundColor: theme.colors.onPrimary }}
                 key={patient.id}
-                onPress={() => {
-                  router.push({
-                    pathname: '/patient',
-                    params: { id: patient.id },
-                  });
-                }}
-                style={{ backgroundColor: 'rgb(28, 145, 242)' }}
               >
-                <Card.Content>
-                  <View tw='flex flex-row space-x-3 items-center'>
-                    <View
-                      style={{ backgroundColor: theme.colors.background }}
-                      tw='rounded-xl p-2'
-                    >
+                <Card
+                  onPress={() => {
+                    router.push({
+                      pathname: '/patient',
+                      params: { id: patient.id },
+                    });
+                  }}
+                  style={{ backgroundColor: theme.colors.primary }}
+                >
+                  <Card.Content>
+                    <View tw='flex flex-row space-x-3 items-center'>
+                      <View
+                        style={{ backgroundColor: theme.colors.background }}
+                        tw='rounded-xl p-2'
+                      >
+                        <Text
+                          style={{ color: theme.colors.text }}
+                          variant='titleLarge'
+                        >
+                          {patient.gender == 'Male' ? '🧑' : '👩'}
+                        </Text>
+                      </View>
                       <Text
                         style={{ color: theme.colors.text }}
                         variant='titleLarge'
                       >
-                        {patient.gender == 'Male' ? '🧑' : '👩'}
+                        {patient.age + ' y/o'}
                       </Text>
                     </View>
-                    <Text
-                      style={{ color: theme.colors.text }}
-                      variant='titleLarge'
-                    >
-                      {patient.age + ' y/o'}
-                    </Text>
-                  </View>
-                  <View tw='mt-2 space-y-1'>
-                    <Text
-                      style={{ color: theme.colors.text }}
-                      variant='bodyMedium'
-                    >
-                      Gender: {patient.gender}
-                    </Text>
-                    <Text
-                      style={{ color: theme.colors.text }}
-                      variant='bodyMedium'
-                    >
-                      Symptoms: {patient.symptoms}
-                    </Text>
-                    <Text
-                      style={{ color: theme.colors.text }}
-                      variant='bodyMedium'
-                    >
-                      History: {patient.history}
-                    </Text>
-                  </View>
-                </Card.Content>
-              </Card>
+                    <View tw='mt-2 space-y-1'>
+                      <Text
+                        style={{ color: theme.colors.text }}
+                        variant='bodyMedium'
+                      >
+                        Gender: {patient.gender}
+                      </Text>
+                      <Text
+                        style={{ color: theme.colors.text }}
+                        variant='bodyMedium'
+                      >
+                        Symptoms: {patient.symptoms}
+                      </Text>
+                      <Text
+                        style={{ color: theme.colors.text }}
+                        variant='bodyMedium'
+                      >
+                        History: {patient.history}
+                      </Text>
+                    </View>
+                  </Card.Content>
+                </Card>
+              </View>
             );
           })}
         </ScrollView>

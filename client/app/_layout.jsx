@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Stack, SplashScreen } from 'expo-router';
 import { useFonts, fontError } from 'expo-font';
 import 'expo-dev-client';
+import { Ionicons } from '@expo/vector-icons';
 
 import { useColorScheme } from 'react-native';
 import {
@@ -61,7 +62,12 @@ export default function RootLayout() {
   });
 
   return (
-    <PaperProvider theme={{ ...paperTheme, fonts }}>
+    <PaperProvider
+      settings={{
+        icon: (props) => <Ionicons {...props} />,
+      }}
+      theme={{ ...paperTheme, fonts }}
+    >
       <Provider store={store}>
         <Stack>
           <Stack.Screen name='dashboard' options={{ headerShown: false }} />

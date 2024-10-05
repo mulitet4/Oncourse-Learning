@@ -26,6 +26,7 @@ export default (gameNamespace) => {
         senderType: 'patient',
         content: content,
       });
+      socket.emit('initialResponse');
     });
 
     socket.on('initial-2', async (patient) => {
@@ -92,6 +93,10 @@ export default (gameNamespace) => {
         points,
         totalPoints,
       });
+      socket.emit('testComplete', {
+        points,
+        totalPoints,
+      });
     });
 
     socket.on('diagnosis', async (data) => {
@@ -126,6 +131,9 @@ export default (gameNamespace) => {
       socket.emit('message', {
         senderType: 'aidoctor',
         content: content,
+      });
+
+      socket.emit('diagnosisComplete', {
         points,
         totalPoints,
       });

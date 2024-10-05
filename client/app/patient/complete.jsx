@@ -11,9 +11,11 @@ const Complete = () => {
   const { id } = useLocalSearchParams();
   const patients = useSelector((state) => state.patients.patients);
   const patient = patients.patients.find((patient) => patient.id == id);
-  const currentPoints = useSelector((state) => state.points.currentPoints);
-  const currentTotalPoints = useSelector(
-    (state) => state.points.currentTotalPoints
+  const labPoints = useSelector((state) => state.points.labPoints);
+  const labTotalPoints = useSelector((state) => state.points.labTotalPoints);
+  const diagnosisPoints = useSelector((state) => state.points.diagnosisPoints);
+  const diagnosisTotalPoints = useSelector(
+    (state) => state.points.diagnosisTotalPoints
   );
 
   return (
@@ -56,7 +58,8 @@ const Complete = () => {
             tw='flex flex-row rounded-full px-3 items-center justify-center'
           >
             <Text variant='titleMedium' style={{ color: theme.colors.text }}>
-              {currentPoints}/{currentTotalPoints} points
+              {labPoints + diagnosisPoints}/
+              {labTotalPoints + diagnosisTotalPoints} Points
             </Text>
           </View>
         </View>
@@ -66,27 +69,53 @@ const Complete = () => {
             Your Score
           </Text>
           <Text tw='mt-2 font-medium' variant='displaySmall'>
-            {currentPoints}/{currentTotalPoints} Points
+            {labPoints + diagnosisPoints}/
+            {labTotalPoints + diagnosisTotalPoints} Points
           </Text>
           <View tw='mt-8 flex flex-row space-x-12'>
-            <View>
-              <Text>LAB TEST</Text>
+            <View tw='flex flex-col justify-center items-center'>
+              <Text variant='titleLarge'>🩻</Text>
+              <Text tw='font-bold'>LAB TEST</Text>
+              <Text>
+                {labPoints}/{labTotalPoints} Points
+              </Text>
             </View>
-            <View>
-              <Text>DIAGNOSIS</Text>
+            <View tw='flex flex-col justify-center items-center'>
+              <Text variant='titleLarge'>👩‍⚕️</Text>
+              <Text tw='font-bold'>DIAGNOSIS</Text>
+              <Text>
+                {diagnosisPoints}/{diagnosisTotalPoints} Points
+              </Text>
             </View>
           </View>
         </View>
 
-        <View>
+        <View
+          style={{
+            height: 53,
+            backgroundColor: theme.colors.onPrimary,
+          }}
+          tw='m-3 rounded-lg'
+        >
           <Button
-            tw='mx-4 mb-4'
+            tw='rounded-lg h-12 pt-1'
             onPress={() => {
               router.back();
             }}
+            contentStyle={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
             mode='contained'
           >
-            Back
+            <Text
+              tw='font-bold'
+              variant='bodyLarge'
+              style={{ color: theme.colors.text }}
+            >
+              NEXT PATIENT
+            </Text>
           </Button>
         </View>
       </View>

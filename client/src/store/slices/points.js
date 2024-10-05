@@ -3,29 +3,30 @@ import { createSlice } from '@reduxjs/toolkit';
 const pointsSlice = createSlice({
   name: 'points',
   initialState: {
-    currentPoints: 0,
-    currentTotalPoints: 0,
-    globalPoints: 0,
-    globalTotalPoints: 0,
+    labPoints: 0,
+    labTotalPoints: 0,
+    diagnosisPoints: 0,
+    diagnosisTotalPoints: 0,
   },
   reducers: {
-    incrementCurrentPoints: (state, data) => {
-      state.currentPoints += data.payload;
+    addLabPoints: (state, data) => {
+      state.labPoints += data.payload;
     },
-    incrementCurrentTotalPoints: (state, data) => {
-      state.currentTotalPoints += data.payload;
+    addLabTotalPoints: (state, data) => {
+      state.labTotalPoints += data.payload;
     },
-    incrementGlobalPoints: (state, data) => {
-      state.globalPoints += data.payload;
+    resetAllPoints: (state, data) => {
+      state.labPoints = 0;
+      state.labTotalPoints = 0;
+      state.diagnosisPoints = 0;
+      state.diagnosisTotalPoints = 0;
     },
-    incrementGlobalTotalPoints: (state, data) => {
-      state.globalTotalPoints += data.payload;
+
+    addDiagnosisPoints: (state, data) => {
+      state.diagnosisPoints += data.payload;
     },
-    resetCurrentPoints: (state, data) => {
-      state.currentPoints = 0;
-    },
-    resetCurrentTotalPoints: (state, data) => {
-      state.currentTotalPoints = 0;
+    addDiagnosisTotalPoints: (state, data) => {
+      state.diagnosisTotalPoints += data.payload;
     },
   },
 });
