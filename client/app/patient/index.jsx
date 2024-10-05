@@ -51,8 +51,6 @@ const PatientChat = () => {
     });
 
     socketRef.current.on('testComplete', (data) => {
-      console.log(typeof data.points);
-      console.log(data);
       _points = Number(data.points);
       _totalPoints = Number(data.totalPoints);
       dispatch(pointsActions.addLabPoints(_points));
