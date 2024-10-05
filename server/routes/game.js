@@ -90,8 +90,7 @@ export default (gameNamespace) => {
       socket.emit('message', {
         senderType: 'aidoctor',
         content: content,
-        points,
-        totalPoints,
+        pointsType: 'test',
       });
       socket.emit('testComplete', {
         points,
@@ -131,6 +130,7 @@ export default (gameNamespace) => {
       socket.emit('message', {
         senderType: 'aidoctor',
         content: content,
+        pointsType: 'diagnosis',
       });
 
       socket.emit('diagnosisComplete', {

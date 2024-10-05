@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, View, useColorScheme } from 'react-native';
+import { Image, ScrollView, View, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Text,
@@ -7,12 +7,14 @@ import {
   Button,
   IconButton,
   Surface,
+  Icon,
 } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { pointsActions } from '../../src/store/slices/points';
+import InfoIcon from '../../assets/ic_fluent_info_24_filled.png';
 
 const PatientChat = () => {
   const theme = useTheme();
@@ -69,10 +71,10 @@ const PatientChat = () => {
     socketRef.current.on(
       'message',
       (data) => {
-        const { senderType, content } = data;
+        const { senderType, content, pointsType } = data;
         setMessages((prevMessages) => [
           ...prevMessages,
-          { senderType, content },
+          { senderType, content, pointsType },
         ]);
       },
       []
@@ -144,10 +146,24 @@ const PatientChat = () => {
             style={{ backgroundColor: theme.colors.secondary }}
             tw='flex flex-row rounded-full px-3 items-center justify-center'
           >
-            <Text variant='titleMedium' style={{ color: theme.colors.text }}>
+            <Text
+              tw='mr-2'
+              variant='titleMedium'
+              style={{ color: theme.colors.text }}
+            >
               {labPoints + diagnosisPoints}/
               {labTotalPoints + diagnosisTotalPoints} points
             </Text>
+            <Icon
+              source={(data) => {
+                return (
+                  <Image
+                    style={{ width: 20, height: 20 }}
+                    source={InfoIcon}
+                  ></Image>
+                );
+              }}
+            ></Icon>
           </View>
         </View>
 
@@ -173,24 +189,44 @@ const PatientChat = () => {
                       </Text>
                     </View>
                     <Text variant='titleMedium'>AI Senior Doctor</Text>
-                    {testComplete && !isComplete && (
+                    {msg.pointsType === 'test' && (
                       <View
-                        tw='rounded-xl px-2 py-1'
-                        style={{ backgroundColor: theme.colors.secondary }}
+                        tw='rounded-full px-2 py-1 flex flex-row items-center'
+                        style={{ backgroundColor: 'rgba(61, 120, 234, 1)' }}
                       >
-                        <Text>
+                        <Text tw='mr-2' style={{ color: theme.colors.text }}>
                           {labPoints}/{labTotalPoints} points
                         </Text>
+                        <Icon
+                          source={(data) => {
+                            return (
+                              <Image
+                                style={{ width: 20, height: 20 }}
+                                source={InfoIcon}
+                              ></Image>
+                            );
+                          }}
+                        ></Icon>
                       </View>
                     )}
-                    {isComplete && (
+                    {msg.pointsType === 'diagnosis' && (
                       <View
-                        tw='rounded-full px-2 py-1'
-                        style={{ backgroundColor: theme.colors.secondary }}
+                        tw='rounded-full px-2 py-1 flex flex-row items-center'
+                        style={{ backgroundColor: 'rgba(61, 120, 234, 1)' }}
                       >
-                        <Text>
+                        <Text style={{ color: theme.colors.text }}>
                           {diagnosisPoints}/{diagnosisTotalPoints} points
                         </Text>
+                        <Icon
+                          source={(data) => {
+                            return (
+                              <Image
+                                style={{ width: 20, height: 20 }}
+                                source={InfoIcon}
+                              ></Image>
+                            );
+                          }}
+                        ></Icon>
                       </View>
                     )}
                   </View>
